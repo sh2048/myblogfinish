@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LonelyStone - 个人博客</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 头部模块 */
+        .header-module {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        .header-highlight {
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+        }
+
+        /* 博主简介模块 */
+        .intro-module {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .intro-content {
+            position: relative;
+        }
+
+        .intro-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+
+        .intro-greeting {
+            font-size: 28px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro-name {
+            font-size: 20px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro-highlight {
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro-highlight:hover {
+            transform: scale(1.05);
+        }
+
+        .blogger-info {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(52, 152, 219, 0.1);
+        }
+
+        .blogger-info h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+
+        .blogger-info p {
+            margin-bottom: 10px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* 旅游随笔模块 */
+        .travel-module {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .travel-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .travel-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 200px;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .travel-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .travel-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .travel-item1 {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+        }
+
+        .travel-item2 {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+        }
+
+        .travel-item3 {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+
+        .travel-item4 {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+        }
+
+        .travel-item5 {
+            background: linear-gradient(45deg, #1abc9c, #16a085);
+        }
+
+        .travel-item6 {
+            background: linear-gradient(45deg, #f1c40f, #f39c12);
+        }
+
+        .travel-highlight {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .travel-description {
+            text-align: center;
+            color: #666;
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+
+        /* 驴友评论模块 */
+        .comments-module {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .comment-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            transition: transform 0.3s ease;
+        }
+
+        .comment-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background: linear-gradient(45deg, #3498db, #9b59b6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .comment-content {
+            flex: 1;
+        }
+
+        .comment-name {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .comment-text {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .comments-highlight {
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+        }
+
+        /* 页脚模块 */
+        .footer-module {
+            background: rgba(44, 62, 80, 0.95);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-highlight {
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+        }
+
+        .footer-links {
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #3498db;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .intro-module {
+                grid-template-columns: 1fr;
+            }
+
+            .travel-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .travel-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-module,
+        .intro-module,
+        .travel-module,
+        .comments-module,
+        .footer-module {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .intro-module {
+            animation-delay: 0.1s;
+        }
+
+        .travel-module {
+            animation-delay: 0.2s;
+        }
+
+        .comments-module {
+            animation-delay: 0.3s;
+        }
+
+        .footer-module {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部模块 -->
+        <div class="header-module">
+            <div class="header-nav">
+                <div class="logo">LONELYSTONE</div>
+                <div class="nav-links">
+                    <a href="#home">首页</a>
+                    <a href="#travel">游记</a>
+                    <a href="#photos">摄影</a>
+                    <a href="#about">关于</a>
+                </div>
+            </div>
+            <div class="header-highlight">头部模块</div>
+        </div>
+
+        <!-- 博主简介模块 -->
+        <div class="intro-module">
+            <div class="intro-content">
+                <div class="intro-banner">
+                    <div class="intro-greeting">Hello, 你好！</div>
+                    <div class="intro-name">我是 LonelyStone</div>
+                    <div class="intro-highlight">博主简介模块</div>
+                </div>
+            </div>
+            <div class="blogger-info">
+                <h3>博主简介</h3>
+                <p><strong>姓名：</strong>孤独的石头</p>
+                <p><strong>职业：</strong>自由摄影师、旅行博主</p>
+                <p><strong>爱好：</strong>摄影、旅行、写作、音乐</p>
+                <p><strong>座右铭：</strong>世界那么大，我想去看看</p>
+                <p><strong>简介：</strong>热爱生活，喜欢用镜头记录美好瞬间，用文字分享旅途感悟。走过很多地方，遇见很多故事，希望通过这个博客与大家分享我的所见所感。</p>
+                <p><strong>联系方式：</strong>lonelystone@example.com</p>
+                <p><strong>社交媒体：</strong>@LonelyStone</p>
+            </div>
+        </div>
+
+        <!-- 旅游随笔模块 -->
+        <div class="travel-module">
+            <h2 class="section-title">探索世界于沙漠·爱我就让我任性</h2>
+            <p class="section-subtitle">2024年6月 · 摄影 · 旅行日记更新</p>
+            
+            <p class="travel-description">
+                在这片金色的土地上，我遇见了最纯净的天空和最自由的风。沙漠的美，不仅在于它的壮阔，更在于它教会我们的宁静与思考。每一粒沙都有它的故事，每一阵风都带着远方的消息。
+            </p>
+
+            <div class="travel-gallery">
+                <div class="travel-item travel-item1">
+                    <div class="travel-highlight">旅游随笔模块</div>
+                </div>
+                <div class="travel-item travel-item2"></div>
+                <div class="travel-item travel-item3"></div>
+                <div class="travel-item travel-item4"></div>
+                <div class="travel-item travel-item5"></div>
+                <div class="travel-item travel-item6"></div>
+            </div>
+
+            <p class="travel-description">
+                骆驼：沙漠中的船，陪伴了无数旅人走过漫漫长路。一路走来，我渐渐明白，旅行的意义不在于目的地，而在于路上的风景和内心的成长。沙漠给了我太多，宁静、思考、还有对生命的新认识。
+            </p>
+        </div>
+
+        <!-- 驴友评论模块 -->
+        <div class="comments-module">
+            <div class="comments-highlight">驴友评论模块</div>
+            
+            <div class="comment-item">
+                <div class="comment-avatar">张</div>
+                <div class="comment-content">
+                    <div class="comment-name">张三 · 资深驴友</div>
+                    <div class="comment-text">石头的照片拍得真棒！每次看你的游记都有想立刻出发的冲动。沙漠的那组照片特别震撼，期待更多作品！</div>
+                </div>
+            </div>
+
+            <div class="comment-item">
+                <div class="comment-avatar">李</div>
+                <div class="comment-content">
+                    <div class="comment-name">李四 · 摄影爱好者</div>
+                    <div class="comment-text">跟着你的博客走了不少地方，每个地方都有不一样的感受。你的文字很有感染力，继续加油！</div>
+                </div>
+            </div>
+
+            <div class="comment-item">
+                <div class="comment-avatar">王</div>
+                <div class="comment-content">
+                    <div class="comment-name">王五 · 旅行达人</div>
+                    <div class="comment-text">作为同样热爱旅行的人，很佩服你的勇气和坚持。沙漠那段经历听起来就很棒，有机会一定要去体验一下！</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页脚模块 -->
+        <div class="footer-module">
+            <div class="footer-highlight">页脚模块</div>
+            <p>© 2024 LonelyStone Blog. 用心记录，用爱分享.</p>
+            <div class="footer-links">
+                <a href="#privacy">隐私政策</a>
+                <a href="#terms">使用条款</a>
+                <a href="#contact">联系我们</a>
+                <a href="#rss">RSS订阅</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 平滑滚动效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 旅游图片点击效果
+        document.querySelectorAll('.travel-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-5px) scale(1)';
+                }, 150);
+            });
+        });
+
+        // 评论项目悬浮效果增强
+        document.querySelectorAll('.comment-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(135deg, #e8f4fd 0%, #d6eaf8 100%)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.background = 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)';
+            });
+        });
+
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease-in-out';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

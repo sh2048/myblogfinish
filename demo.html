@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="前端演示 - My Blog" />
+  <title>前端演示 · My Blog</title>
+  <link href="styles/core.css" rel="stylesheet" />
+</head>
+<body>
+<header class="shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light container">
+      <a class="navbar-brand" href="#"><i class="bi bi-pencil-square"></i> My Blog</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain"
+              aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="navMain" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html#/">首页</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">联系表单</a></li>
+          <li class="nav-item"><a class="nav-link" href="demo.html">前端演示</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.notion.so/web-240b5034f3d38096a900f1c096fbe7e3?source=copy_link" target="_blank" rel="noopener">学习资源</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+<section class="top-img text-white d-flex align-items-center">
+    <div class="container py-5">
+      <h1 class="display-5 fw-bold">web前端教学</h1>
+      <p class="lead mb-0">HTML/CSS/JS</p>
+    </div>
+  </section>
+<main id="main-content" class="container my-5">
+<section id="demo" aria-labelledby="demo-title" class="mb-5">
+      <h2 id="demo-title" class="mb-4">前端交互与布局演示</h2>
+
+      <div class="card p-3 mb-4">
+        <h3 class="h5">Flexbox 布局演示</h3>
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <label class="form-label mb-0">主轴对齐：</label>
+          <select id="justify" class="form-select form-select-sm w-auto">
+            <option value="flex-start">flex-start</option>
+            <option value="center" selected>center</option>
+            <option value="space-between">space-between</option>
+            <option value="space-around">space-around</option>
+            <option value="space-evenly">space-evenly</option>
+          </select>
+          <label class="form-label mb-0 ms-3">交叉轴对齐：</label>
+          <select id="align" class="form-select form-select-sm w-auto">
+            <option value="stretch">stretch</option>
+            <option value="flex-start">flex-start</option>
+            <option value="center" selected>center</option>
+            <option value="flex-end">flex-end</option>
+          </select>
+        </div>
+        <div id="flex-playground" class="flex-demo border rounded p-3">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+        </div>
+        <small class="text-muted">在 DevTools 中观察盒模型与布局属性的变化。</small>
+      </div>
+
+      <div class="card p-3 mb-4">
+        <h3 class="h5">BOM 操作示例</h3>
+        <p id="bom-info" class="mb-2">当前地址：<code></code></p>
+        <button id="goto-top" class="btn btn-outline-primary btn-sm">返回顶部</button>
+        <button id="goto-baidu" class="btn btn-outline-secondary btn-sm">跳转到百度</button>
+      </div>
+
+      <div class="card p-3 mb-4">
+        <h3 class="h5">HTTP 状态码演示</h3>
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <label class="form-label mb-0">选择状态码：</label>
+          <select id="status-select" class="form-select form-select-sm w-auto">
+            <option>200</option>
+            <option>302</option>
+            <option>404</option>
+          </select>
+          <button id="check-status" class="btn btn-primary btn-sm">发起请求</button>
+        </div>
+        <div id="http-result" class="small text-muted">在 Network 面板查看请求与响应头、Cookie 等。</div>
+      </div>
+
+      <div class="card p-3">
+        <h3 class="h5">XSS 风险演示（教学用）</h3>
+        <form id="message-form" class="row g-2">
+          <div class="col-sm-4"><input id="xss-name" class="form-control" placeholder="昵称，例如 Alice"></div>
+          <div class="col-sm-6"><input id="xss-message" class="form-control" placeholder='输入 &lt;script&gt;alert(1)&lt;/script&gt; 观察行为'></div>
+          <div class="col-sm-2 d-grid"><button class="btn btn-danger" type="submit">提交</button></div>
+        </form>
+        <div class="mt-3">
+          <p class="mb-1">不安全渲染（故意演示风险）：</p>
+          <div id="unsafe-display" class="border rounded p-2"></div>
+          <p class="mb-1 mt-3">安全渲染（textContent/转义）：</p>
+          <div id="safe-display" class="border rounded p-2"></div>
+          <small class="text-muted d-block mt-2">说明：现代浏览器通常不会执行通过 <code>innerHTML</code> 注入的 <code>&lt;script&gt;</code>，如未弹窗会给出错误提示。</small>
+        </div>
+      </div>
+    </section>
+</main>
+<script src="scripts/script.js"></script>
+
+  <script>
+  document.addEventListener('click', function (e) {
+    if (e.target.matches('.navbar-collapse .nav-link')) {
+      var nav = document.getElementById('navMain');
+      if (nav && window.bootstrap) {
+        window.bootstrap.Collapse.getOrCreateInstance(nav).hide();
+      }
+    }
+  });
+  </script>
+</body>
+</html>
